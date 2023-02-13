@@ -1,0 +1,7 @@
+I am not sure for the answer of ext3.txt and ext4.txt. Record my opinion since I delete .git stupidly.
+
+ext3.txt:
+	The critical path should be the path from input register to the first register. I calculted CLK-to-Q delay of input register + propagation delay of multiplication block + propagation delay of adder block + setup time of first register.
+
+ext4.txt:
+	The critical path should be the path from the first register to the second register. I calculted CLK-to-Q delay of the first register + propagation delay of multiplication block + setup time of the second register.
