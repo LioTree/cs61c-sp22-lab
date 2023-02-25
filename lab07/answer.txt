@@ -3,6 +3,31 @@ Exercise 1
         1. What combination of parameters is producing the hit rate you observe? (Hint: Your answer should be of the form: “Because [parameter A] in bytes is exactly equal to [parameter B] in bytes.”)
             Because block size in bytes is exactly equal to step size in bytes.
         2. What is our hit rate if we increase Rep Count arbitrarily? Why?
-            0.
+            0. The access addresses are same in every rep.
         3. How could we modify one program parameter to increase our hit rate? (Hint: Your answer should be of the form: “Change [parameter] to [value].” Note: we don’t care if we access the same array elements. Just give us a program parameter modification that would increase the hit rate.
-            Change block size to 128.
+            Change step size to 1.
+    Scenario 2
+        1. How many memory accesses are there per iteration of the inner loop? (not the one involving repcount). It’s not 1.
+            2
+        2. What is the repeating hit/miss pattern? WHY? (Hint: it repeats every 4 accesses).
+            1 miss 3 hit.
+        3. This should follow very straightforwardly from the above question: Explain the hit rate in terms of the hit/miss pattern.
+            The block size is 16 bytes and the step size is 2(2*4 = 8). So the write access, next read access(address + 8) and next write access(address + 8) will hit the cache after the miss of first read access. 
+        4. Keeping everything else the same, what happens to our hit rate as Rep Count goes to infinity? Why? Try it out by changing the appropriate program parameter and letting the code run!
+            100%. Because all elements which needed to be accessed will be in the cache. 
+        5. You should have noticed that our hit rate was pretty high for this scenario, and your answer to the previous question should give you a good understanding of why. IF YOU ARE NOT SURE WHY, consider the size of the array and compare it to the size of the cache. Now, consider the following:
+        Suppose we have a program that iterates through a very large array (AKA way bigger than the size of the cache) repcount times. During each Rep, we map a different function to the elements of our array (e.g. if Rep Count = 1024, we map 1024 different functions onto each of the array elements, one per Rep). (For reference, in this scenario, we just had one function (incrementation) and one Rep).
+        QUESTION: Given the program described above, how can we restructure its array accesses to achieve a hit rate like that achieved in this scenario? Assume that each array element is to be modified independently of the others AKA it doesn’t matter if Rep k is applied to element arr[i] before Rep k is applied to element arr[i+1], etc.
+            Exchange the inner loop and the outer loop.
+    Scenario 3
+        1. What is the hit rate of our L1 cache? Our L2 cache? Overall?
+            0.50 0.00 0.33
+        2. How many accesses do we have to the L1 cache total? How many of them are misses?
+            32 16
+        3. How many accesses do we have to the L2 cache total? How does this relate to the L1 cache (think about what the L1 cache has to do in order to make us access the L2 cache)?
+            16. When the access to the L1 cache misses, it will access the L2 cache.
+        4. What program parameter would allow us to increase our L2 hit rate, but keep our L1 hit rate the same? Why?
+            Rep count. After the first rep, all elements of array will be stored into L2 cache, when access to L1 cache misses in next rep, access to L2 cache will hit.
+        5. What happens to our hit rates for L1 and L2 as we slowly increase the number of blocks in L1? What about L1 block size?
+            The hit rates for both L1 and L2 will be the same.
+            The hit rate for L1 will increase and the hit rate for L2 will be the same.
