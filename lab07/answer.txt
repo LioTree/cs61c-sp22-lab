@@ -1,0 +1,8 @@
+Exercise 1
+    Scenario 1
+        1. What combination of parameters is producing the hit rate you observe? (Hint: Your answer should be of the form: “Because [parameter A] in bytes is exactly equal to [parameter B] in bytes.”)
+            Because block size in bytes is exactly equal to step size in bytes.
+        2. What is our hit rate if we increase Rep Count arbitrarily? Why?
+            0.
+        3. How could we modify one program parameter to increase our hit rate? (Hint: Your answer should be of the form: “Change [parameter] to [value].” Note: we don’t care if we access the same array elements. Just give us a program parameter modification that would increase the hit rate.
+            Change block size to 128.
