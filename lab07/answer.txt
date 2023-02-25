@@ -31,3 +31,8 @@ Exercise 1
         5. What happens to our hit rates for L1 and L2 as we slowly increase the number of blocks in L1? What about L1 block size?
             The hit rates for both L1 and L2 will be the same.
             The hit rate for L1 will increase and the hit rate for L2 will be the same.
+Exercise 2
+    1. Which 2 orderings perform best for these 1000-by-1000 matrices?
+        jki kji. The more memory accesses determine by the inner cycle, the better the performance.
+    2. Which 2 orderings perform the worst?
+        kij ikj
