@@ -82,6 +82,15 @@ double dotp_manual_optimized(double* x, double* y, int arr_size) {
     double global_sum = 0.0;
     // TODO: Implement this function
     // Do NOT use the `reduction` directive here!
+    #pragma omp parallel
+    {
+        double sum = 0.0;
+        #pragma omp for
+        for (int i = 0; i < arr_size; i++) 
+            sum += x[i] * y[i];
+        #pragma omp critical
+        global_sum += sum;
+    }
     return global_sum;
 }
 
@@ -90,6 +99,9 @@ double dotp_reduction_optimized(double* x, double* y, int arr_size) {
     double global_sum = 0.0;
     // TODO: Implement this function
     // Please DO use the `reduction` directive here!
+    #pragma omp parallel for reduction(+:global_sum)
+    for (int i = 0; i < arr_size; i++) 
+        global_sum += x[i] * y[i];
     return global_sum;
 }
 
